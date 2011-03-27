@@ -1,15 +1,17 @@
 module Cukeregator
 
   class HtmlReader
-    attr_reader :totals_inner_html, :scenario_totals, :step_totals
+    include Status
+
+    attr_reader :totals_inner_html, :total_scenarios, :scenario_totals, :total_steps, :step_totals
     attr_reader :duration_inner_html, :duration, :path
 
     def initialize(html, path)
       @scripts             = parse_scripts(Nokogiri::HTML(html))
       @path                = path
-      @scenario_totals     = parse_totals(:scenario)
-      @step_totals         = parse_totals(:step)
       @duration            = parse_duration
+      @total_scenarios, @scenario_totals = parse_totals(:scenario)
+      @total_steps,     @step_totals     = parse_totals(:step)
     end
 
     def totals_inner_html
@@ -22,10 +24,12 @@ module Cukeregator
 
     private
     def parse_totals(which)
-      totals_inner_html =~ /\d+ #{which}s? \(([^\)]+)/
-      s = $1
-      raise("no total string found for '#{which}'") unless s
-      to_hash(s)
+      totals_inner_html =~ /(\d+) #{which}s? \(([^\)]+)/
+      total = $1
+      raise("no total string found for '#{which}'") unless total
+      breakdown = $2
+      raise("no breakdown string found for '#{which}'") unless breakdown
+      return total.to_i, to_hash(breakdown)
     end
     
     def parse_duration
