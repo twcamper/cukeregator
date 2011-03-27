@@ -1,0 +1,15 @@
+h2. Cukeregator
+
+Provides a summary view of multiple "cucumber":https://github.com/aslakhellesoy/cucumber html output files.
+
+<pre>
+  $ cukeregator tmp/cucumber*.html > parallel_run_summary.html
+</pre>
+
+This command will aggregate the results of however many output files are matched by the shell glob, and write those result to a document with the same kind of summary as the normal cuke output.
+
+It also lists the summary for each individual results file, and links back to it whenever you want the detail.
+
+h3. Dependencies
+
+@Nokogiri@ is used to parse the cucumber files, as well as to build the summary file.
