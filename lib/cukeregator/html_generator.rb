@@ -46,9 +46,11 @@ module Cukeregator
     def cucumbers
       c = new_node(:table)
       c['id'] = "cucumbers"
+      tb = new_node(:tbody)
       @aggregator.docs.each do |doc_data|
-        c << row(doc_data)
+        tb << row(doc_data)
       end
+      c << tb
       c
     end
 
