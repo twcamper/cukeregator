@@ -1,6 +1,6 @@
 module Cukeregator
 
-  class DocData
+  class HtmlReader
     attr_reader :totals_inner_html, :scenario_totals, :step_totals
     attr_reader :duration_inner_html, :duration, :path
 

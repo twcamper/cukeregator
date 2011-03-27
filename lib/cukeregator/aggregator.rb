@@ -5,7 +5,7 @@ module Cukeregator
 
     def initialize(files)
       @docs = files.map do |f|
-        DocData.new(File.read(f), f)
+        HtmlReader.new(File.read(f), f)
       end
     end
 

@@ -1,8 +1,9 @@
 require 'rubygems'
 require 'nokogiri'
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
-require 'cukeregator/doc_data'
+require 'cukeregator/html_reader'
 require 'cukeregator/aggregator'
+require 'cukeregator/html_generator'
 
 module Cukeregator
 

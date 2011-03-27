@@ -12,7 +12,7 @@ module Cukeregator
     end
   end
 
-  describe DocData do
+  describe HtmlReader do
     before(:all) do
       @doc_data = Aggregator.new(%w[fixtures/passed_and_failed.html]).docs.first
     end
