@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rspec'
-require 'cuknitter'
-Dir["spec/cuknitter/support/**/*.rb"].each { |lib| require lib }
+require 'cukeregator'
+Dir["spec/cukeregator/support/**/*.rb"].each { |lib| require lib }
 
 RSpec.configure do |config|
   config.include(Spec::Functional::Cli)
