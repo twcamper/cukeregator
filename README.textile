@@ -2,14 +2,49 @@ h2. Cukeregator
 
 Provides a summary view of multiple "cucumber":https://github.com/aslakhellesoy/cucumber html output files.
 
+h3. Examples
+
+* With the gem installed, from within your project directory:
+
 <pre>
-  $ cukeregator tmp/cucumber*.html > parallel_run_summary.html
+      $ cukeregator tmp/cucumber*.html > parallel_run_summary.html
 </pre>
 
-This command will aggregate the results of however many output files are matched by the shell glob, and write those results to a document with the same kind of summary as the normal cuke output.
+This command will aggregate the results of however many output files are matched by the shell glob, and write those results to a document with the same kind of summary as the normal cuke output.  It also lists the summary for each individual results file, and links back to it whenever you want the detail.
 
-It also lists the summary for each individual results file, and links back to it whenever you want the detail.
+* A demo from within your local clone of this git repo:
+
+<pre>
+      $ ./bin/cukeregator fixtures/*.html > cukeregated.html
+</pre>
+
+Summarizes my test files, which are filtered samples from the 0.9.4 Cucumber project's feature suite.
+
+h3. Tests
+
+<pre>
+  $ rake
+</pre>
+
+h3. Installation
+
+<pre>
+  $ gem install cukeregator
+</pre>
 
 h3. Dependencies
 
 @Nokogiri@ is used to parse the cucumber files, as well as to build the summary file.
+
+
+h3. TODO's
+
+* styling
+* handle 'undefined' status explicitly
+
+h3. We'll See
+
+* dump Nokogiri for Haml?  (Would have to hand parse in the reader without Nokogiri.)
+* enable STDIN as source of file list input in the bin?
+* Rake task as cmd line convenince?
+* path list option for cases when a glob won't work?

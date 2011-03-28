@@ -1,3 +1,4 @@
+# Copyright 2011 ThoughtWorks, Inc. Licensed under the MIT License
 module Cukeregator
   module Status
     def status

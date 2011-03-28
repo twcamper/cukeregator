@@ -1,3 +1,4 @@
+# Copyright 2011 ThoughtWorks, Inc. Licensed under the MIT License
 require 'rubygems'
 require 'nokogiri'
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
