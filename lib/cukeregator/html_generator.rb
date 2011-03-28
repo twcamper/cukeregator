@@ -89,9 +89,7 @@ module Cukeregator
     def inline_css
       style = new_node(:style)
       style['type'] = 'text/css'
-      style.content = %Q{
-        #{File.read(File.expand_path('lib/cukeregator/style.css'))}
-      }
+      style.content = "\n#{File.read(File.expand_path(File.dirname(__FILE__)) + '/style.css')}"
       style
     end
   end
