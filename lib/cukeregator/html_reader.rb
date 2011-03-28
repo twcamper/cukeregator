@@ -64,7 +64,7 @@ module Cukeregator
     end
 
     # our data lies in javascript functions at the bottom of the body, because
-    # Aslak can't put up the totals until the suite completes
+    # Cucumber can't put up the totals until the suite completes
     def parse_scripts(doc)
       doc.search("body script").map {|script| script.text }
     end
