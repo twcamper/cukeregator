@@ -12,6 +12,8 @@ module Cukeregator
       @doc.to_html
     end
 
+    private
+
     def new_doc
       doc =Nokogiri::XML::Document.new
       root = Nokogiri::XML::Node.new('html', doc)
@@ -45,27 +47,26 @@ module Cukeregator
     end
 
     def cucumbers
-      c = new_node(:table)
-      c['id'] = "cucumbers"
-      tb = new_node(:tbody)
+      cukes = new_node(:div)
+      cukes['id'] = "cucumbers"
       @aggregator.docs.each do |doc_data|
-        tb << row(doc_data)
+        cukes << cucumber(doc_data)
       end
-      c << tb
-      c
+      cukes
     end
 
-    def row(doc_data)
-      tr = new_node(:tr, doc_data.status)
-      td = new_node(:td, 'result-detail')
-      td << link_for(doc_data.path)
-      tr << td
+    def cucumber(doc_data)
+      c = new_node(:div, doc_data.status)
+      div = new_node(:div, 'result-summary')
+      div << summary_p(doc_data, 'totals')
+      div << summary_p(doc_data, 'duration')
 
-      td = new_node(:td, 'result-summary')
-      td << summary_p(doc_data, 'totals')
-      td << summary_p(doc_data, 'duration')
-      tr << td
-      tr
+      a = link_for(doc_data.path)
+      a['class'] = 'result-detail'
+      div << a
+
+      c << div
+      c
     end
 
     def link_for(path)
