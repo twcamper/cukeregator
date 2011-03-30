@@ -14,14 +14,6 @@ module Cukeregator
 
     private
 
-    def new_doc
-      doc =Nokogiri::XML::Document.new
-      root = Nokogiri::XML::Node.new('html', doc)
-      root.create_internal_subset( 'html', "-//W3C//DTD XHTML 1.0 Strict//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd")
-      doc << root
-      doc
-    end
-
     def head
       h = new_node(:head)
       title = new_node(:title)
@@ -33,58 +25,37 @@ module Cukeregator
 
     def body
       b = new_node(:body)
-      b << summary
+      b << summary(@aggregator, :id => :summary, :class => @aggregator.status)
+      b << new_node(:hr)
       b << cucumbers
       b
     end
 
-    def summary
-      s = new_node(:div, @aggregator.status)
-      s['id'] = "summary"
-      s << summary_p(@aggregator, 'totals')
-      s << summary_p(@aggregator, 'duration')
-      s
-    end
-
     def cucumbers
-      cukes = new_node(:div)
-      cukes['id'] = "cucumbers"
+      c = new_node(:div, :id => :cucumbers )
       @aggregator.docs.each do |doc_data|
-        cukes << cucumber(doc_data)
+        c << summary(doc_data, :class => "#{doc_data.status} cucumber result_summary") << link_for(doc_data.path, :class => :result_detail)
       end
-      cukes
-    end
-
-    def cucumber(doc_data)
-      c = new_node(:div, doc_data.status)
-      div = new_node(:div, 'result-summary')
-      div << summary_p(doc_data, 'totals')
-      div << summary_p(doc_data, 'duration')
-
-      a = link_for(doc_data.path)
-      a['class'] = 'result-detail'
-      div << a
-
-      c << div
       c
     end
 
-    def link_for(path)
-      a  = new_node(:a)
+    def link_for(path, attributes = {})
+      a  = new_node(:a, attributes)
       a['href'] = path
-      a.content = path
+      a.content = path.split(File::SEPARATOR).last
       a
     end
 
-    def new_node(name, class_name = nil)
-      n = Nokogiri::XML::Node.new(name.to_s, @doc)
-      n['class'] = class_name.to_s if class_name
-      n
+    def summary(data, attributes)
+      s = new_node(:div, attributes)
+      s << summary_p(data, 'totals')
+      s << summary_p(data, 'duration')
+      s
     end
 
-    def summary_p(o, which)
+    def summary_p(data, which)
       p  = new_node(:p, which)
-      p.inner_html = o.send("#{which}_inner_html")
+      p.inner_html = data.send("#{which}_inner_html")
       p
     end
 
@@ -93,6 +64,22 @@ module Cukeregator
       style['type'] = 'text/css'
       style.content = "\n#{File.read(File.expand_path(File.dirname(__FILE__)) + '/style.css')}"
       style
+    end
+
+    def new_doc
+      doc =Nokogiri::XML::Document.new
+      root = Nokogiri::XML::Node.new('html', doc)
+      root.create_internal_subset( 'html', "-//W3C//DTD XHTML 1.0 Strict//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd")
+      doc << root
+      doc
+    end
+
+    def new_node(name, attributes = {})
+      n = Nokogiri::XML::Node.new(name.to_s, @doc)
+      attributes.each do | attr, value |
+        n[attr.to_s] = value.to_s
+      end
+      n
     end
   end
 end
