@@ -46,5 +46,5 @@ h3. We'll See
 
 * dump Nokogiri for Haml?  (Would have to hand parse in the reader without Nokogiri.)
 * enable STDIN as source of file list input in the bin?
-* Rake task as cmd line convenince?
+* Rake task as cmd line convenience?
 * path list option for cases when a glob won't work?
