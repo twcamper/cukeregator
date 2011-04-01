@@ -19,7 +19,6 @@ module Cukeregator
       title = new_node(:title)
       title.content = "All Cucumber Results"
       h << title
-      h << new_node(:base, :href => "file:///#{File.expand_path(Dir.pwd)}/")
       h << inline_css
       h
     end
