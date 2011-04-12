@@ -39,7 +39,7 @@ namespace :cukeregator do
 
   spec = Gem::Specification.new do |s|
     s.name = 'cukeregator'
-    s.version = '0.1.1'
+    s.version = '0.1.2'
     s.rubyforge_project = s.name
 
     s.platform = Gem::Platform::RUBY
