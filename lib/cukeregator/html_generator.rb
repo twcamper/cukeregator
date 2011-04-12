@@ -9,7 +9,7 @@ module Cukeregator
     def doc
       @doc.root << head
       @doc.root << body
-      @doc.to_html
+      @doc.to_xml
     end
 
     private
