@@ -1,3 +1,40 @@
-.passed { background-color: #65C400 }
-.failed { background-color: #C40D0D }
-.pending { background-color: #FAF834 }
+body
+{ background:#696969;}
+p {
+	font-family: Arial;
+	}
+	
+div{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 10px 20px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	border-radius: 20px; }
+	
+.header{
+	color: #FFFFFF;
+	font-size: 24px;
+	margin: 0px;
+	padding: 0px 10px;
+}
+.passed { 
+	background-color: #308014;
+	font-size: 14px;
+	color: #FFFFFF;	
+	}
+.failed { 
+	background-color: #8B0000;
+	font-size: 14px;
+	color: #FFFFFF;
+	}
+.pending { 
+	background-color: #E3CF57;
+	font-size: 14px;
+	}
+
+a:link {
+	font-family: Arial;
+	color: #6495ED;
+	}
